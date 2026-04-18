@@ -1,9 +1,9 @@
 #ifndef DATA_STRUCTURES_SINGLENODE_H
 #define DATA_STRUCTURES_SINGLENODE_H
 
-struct SingleLinkedNode {
+struct SingleNode {
     int data;
-    SingleLinkedNode* next;
+    SingleNode* next;
 };
 
 #endif //DATA_STRUCTURES_SINGLENODE_H
