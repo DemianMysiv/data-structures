@@ -2,6 +2,7 @@
 #include <iostream>
 #include <memory>
 #include "Node.h"
+#include <string>
 
 template <typename T>
 
@@ -35,4 +36,19 @@ public:
         }
         listSize++;
     }
+
+
+    void deleteFront() {
+            if (head == nullptr) {
+            throw std::string("List is empty, there is nothing to delete");
+        } else { // якщо список не порожній
+            head = std::move(head->next); // тепер другий елемент списку буде першим, а колишній перший елемент буде видалений бо на нього ніхто не буде вказувати
+            listSize--;
+        }
+    }
+
+
 };
+
+
+
