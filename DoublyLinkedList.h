@@ -202,4 +202,6 @@ void isEmpty() {
     } else {
         std::cout << "The list is not empty." << std::endl;
     }
+}
+
 };
