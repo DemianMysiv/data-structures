@@ -144,4 +144,17 @@ void find(T data) {
     }
     std::cout << "Element " << data << " not found in the list." << std::endl;
 }
+
+void printList() {
+    SinglyNode<T>* current = head.get();
+    std::cout << "List elements: ";
+    while (current != nullptr) {
+        std::cout << current->data << " ";
+        current = current->next.get();
+    }
+    std::cout << std::endl;
+}
+
+
+
 };
