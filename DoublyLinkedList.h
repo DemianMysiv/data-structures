@@ -29,4 +29,17 @@ public:
         listSize++;
     }
 
+void addBack(T data) {
+        auto newNode = std::make_shared<DoublyNode<T>>(data);
+        if (head == nullptr) { // якщо список порожній
+            head = newNode; // то нова нода буде одночасно і першим, заодно і останнім елементом
+            tail = newNode;
+        } else {
+            newNode->previous = tail; // робимо так щоб вказівник нового останнього на попередній елемент був вказівником на колишній останній елемент
+            tail->next = newNode; // робимо так щоб вказівник колишнього останнього на наступний елемент був вказівником на нову ноду
+            tail = newNode; // тепер він вказватиме на новий останній
+        }
+        listSize++;
+
+}
 };
