@@ -195,4 +195,11 @@ void size() {
     std::cout << "Size of the list: " << listSize << std::endl;
 
 }
+
+void isEmpty() {
+    if (listSize == 0) {
+        std::cout << "The list is empty." << std::endl;
+    } else {
+        std::cout << "The list is not empty." << std::endl;
+    }
 };
