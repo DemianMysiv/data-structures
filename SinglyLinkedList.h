@@ -47,8 +47,36 @@ public:
         }
     }
 
+    void deleteBack() {
+        if (head == nullptr) {
+            throw std::string("List is empty, there is nothing to delete");
 
+        } else {
+            if (head->next == nullptr) { // якщо в списку лише один елемент
+                head = nullptr; // то після видалення список буде порожнім
+            } else {
+                SinglyNode<T>* current = head.get();
+                while (current->next->next != nullptr) { // в цьому циклі ми доберемося до передостаннього елемента списку, у якого вказівник на наступний елемент буде вказівником на останній елемент, а вказівник на наступний елемент останнього елемента буде nullptr
+                    current = current->next.get();
+                }
+                current->next = nullptr; // тепер вказівник на наступний елемент після передостаннього елемента буде nullptr, а колишній останній елемент буде видалений бо на нього ніхто не буде вказувати
+            
+        }
+            listSize--;
+        }
+    }
+
+    void accessbyindex(int index) {
+        if (index < 0 || index >= listSize) {
+            throw std::string("Неправильний індекс");
+
+        } else {
+            SinglyNode<T>* current = head.get();
+            for (int i = 0; i < index; i++) {
+                current = current->next.get();
+            }
+
+            std::cout << "Element at index " << index << ": " << current->data << std::endl;
+        }
+    }
 };
-
-
-
