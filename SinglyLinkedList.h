@@ -117,4 +117,8 @@ void deletebyindex(int index) {
     }
 
 }
+
+void size() {
+    std::cout << "Size of the list: " << listSize << std::endl;
+}
 };
