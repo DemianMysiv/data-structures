@@ -191,5 +191,8 @@ void deletebyindex(int index) {
     listSize--;
 }
 
+void size() {
+    std::cout << "Size of the list: " << listSize << std::endl;
 
+}
 };
