@@ -203,5 +203,17 @@ void isEmpty() {
         std::cout << "The list is not empty." << std::endl;
     }
 }
-
+void find(T data) {
+    DoublyNode<T>* current = head.get();
+    int index = 0;
+    while (current != nullptr) {
+        if (current->data == data) {
+            std::cout << "Element " << data << " found at index: " << index << std::endl;
+            return;
+        }
+        current = current->next.get();
+        index++;
+    }
+    std::cout << "Element " << data << " not found in the list." << std::endl;
+}
 };
