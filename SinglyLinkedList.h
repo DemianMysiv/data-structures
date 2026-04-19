@@ -79,4 +79,42 @@ public:
             std::cout << "Element at index " << index << ": " << current->data << std::endl;
         }
     }
+
+
+void addbyindex(int index, T data) {
+    if (index < 0 || index > listSize) { 
+        throw std::string("Неправильний індекс");
+    } else if (index == 0) {
+        addFront(data);
+    } else if (index == listSize) {
+        addBack(data);
+    } else {
+        auto newNode = std::make_unique<SinglyNode<T>>(data); // створюємо нову ноду з даними, які ми хочемо додати
+        SinglyNode<T>* current = head.get(); // отримуємо вказівник на перший елемент списку
+        for (int i = 0; i < index - 1; i++) {
+            current = current->next.get();
+        } // в цьому циклі ми доберемося до елемента, який знаходиться перед позицією, на яку ми хочемо додати нову ноду
+        newNode->next = std::move(current->next);
+        current->next = std::move(newNode);
+        listSize++;
+    }
+}
+
+void deletebyindex(int index) {
+    if (index < 0 || index >= listSize) {
+        throw std::string("Неправильний індекс");
+    } else if (index == 0) {
+        deleteFront();
+    } else if (index == listSize - 1) {
+        deleteBack();
+    } else {
+        SinglyNode<T>* current = head.get();
+        for (int i = 0; i < index - 1; i++) {
+            current = current->next.get();
+        }
+        current->next = std::move(current->next->next);
+        listSize--;
+    }
+
+}
 };
