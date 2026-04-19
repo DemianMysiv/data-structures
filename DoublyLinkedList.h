@@ -76,7 +76,7 @@ void accessbyindex(int index) {
         throw std::string("Неправильний індекс");
     }
 
-    DoublyNode<T>* current;
+    std::shared_ptr<DoublyNode<T>> current; // Використовуємо shared_ptr замість сирого вказівника
 
     int distFromHead = index;
     int distFromTail = (listSize - 1) - index;
@@ -89,7 +89,7 @@ void accessbyindex(int index) {
     } else {
         current = tail;
         for (int i = 0; i < distFromTail; i++) {
-            current = current->prev;
+            current = current->prev.lock(); // .lock() конвертує weak_ptr у shared_ptr
         }
     }
 
