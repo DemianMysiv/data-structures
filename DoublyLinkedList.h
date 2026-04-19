@@ -141,4 +141,55 @@ void addbyindex(int index, T data) {
 
     listSize++;
 }
+
+void deletebyindex(int index) {
+    // Для видалення індекс має бути строго меншим за listSize, бо елемента з індексом listSize не існує
+    if (index < 0 || index >= listSize) {
+        throw std::string("Неправильний індекс");
+    }
+
+    if (index == 0) {
+        deleteFront();
+        return;
+    } 
+    
+    // Якщо це останній елемент
+    if (index == listSize - 1) {
+        deleteBack();
+        return;
+    }
+
+    DoublyNode<T>* current;
+
+    int targetIndex = index - 1; // йдемо до елемента, що стоїть ПЕРЕД тим, який ми хочемо видалити
+    int distFromHead = targetIndex;
+    int distFromTail = (listSize - 1) - targetIndex;
+
+    if (distFromHead <= distFromTail) {
+        current = head.get();
+        for (int i = 0; i < distFromHead; i++) {
+            current = current->next.get();
+        }
+    } else {
+        current = tail; // Зберігаємо твій стиль (якщо tail це shared_ptr, можливо знадобиться tail.get())
+        for (int i = 0; i < distFromTail; i++) {
+            current = current->prev; // Якщо prev це weak_ptr (як у deleteBack), можливо знадобиться current->prev.lock().get()
+        }
+    }
+
+    // До тепер current вказує на елемент ПЕРЕД тим, який ми хочемо видалити (позиція index - 1)
+    // Зберігаємо shared_ptr на ноду, яку видаляємо, щоб вона не знищилась до того, як ми перекинемо зв'язки
+    auto nodeToDelete = current->next;
+
+    // Перекидаємо вказівник next поточної ноди на ноду ПІСЛЯ тієї, яку видаляємо
+    current->next = nodeToDelete->next;
+
+    // Перекидаємо вказівник prev наступної ноди на поточну.
+    // Найпростіше взяти його з nodeToDelete->prev, адже він вже вказує куди треба (на current)
+    (current->next)->prev = nodeToDelete->prev; 
+
+    listSize--;
+}
+
+
 };
