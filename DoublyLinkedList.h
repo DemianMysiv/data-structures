@@ -69,6 +69,31 @@ void deleteBack() {
             }
         }
             listSize--;
-    }   
+    }
+    
+void accessbyindex(int index) {
+    if (index < 0 || index >= listSize) {
+        throw std::string("Неправильний індекс");
+    }
+
+    DoublyNode<T>* current;
+
+    int distFromHead = index;
+    int distFromTail = (listSize - 1) - index;
+
+    if (distFromHead <= distFromTail) {
+        current = head;
+        for (int i = 0; i < distFromHead; i++) {
+            current = current->next;
+        }
+    } else {
+        current = tail;
+        for (int i = 0; i < distFromTail; i++) {
+            current = current->prev;
+        }
+    }
+
+    std::cout << "Element at index " << index << ": " << current->data << std::endl;
+}
 };
 
